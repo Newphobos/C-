@@ -66,5 +66,17 @@ namespace CRUD_operation
             Clear();
             MessageBox.Show("Submitted Successfully");
         }
+
+        void PopulateDataGridView()
+        {
+
+            using (DBEntities db = new DBEntities)
+            { 
+                
+            
+            
+            }
+        
+        }
     }
 }
