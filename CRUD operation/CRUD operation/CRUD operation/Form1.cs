@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
+
 namespace CRUD_operation
 {
     public partial class Form1 : Form
@@ -25,6 +27,7 @@ namespace CRUD_operation
         private void Form1_Load(object sender, EventArgs e)
         {
             Clear();
+            PopulateDataGridView();
         }
 
         private void txtAddress_Click(object sender, EventArgs e)
@@ -50,19 +53,20 @@ namespace CRUD_operation
         private void btnSave_Click(object sender, EventArgs e)
         {
 
-            model.First_Name = txtFirstName.Text.Trim();
-            model.Last_Name = txtLastName.Text.Trim();
+            model.FirstName = txtFirstName.Text.Trim();
+            model.LastName = txtLastName.Text.Trim();
             model.Address = txtAddress.Text.Trim();
             model.City = txtCity.Text.Trim();
 
 
-            using (DBEntities db = new DBEntities())
+            using (EFDBEntities db = new EFDBEntities())
             {
 
                 db.Customers.Add(model);
                 db.SaveChanges();
             
             }
+            PopulateDataGridView();
             Clear();
             MessageBox.Show("Submitted Successfully");
         }
@@ -70,10 +74,10 @@ namespace CRUD_operation
         void PopulateDataGridView()
         {
 
-            using (DBEntities db = new DBEntities)
-            { 
-                
-            
+            using (EFDBEntities db = new EFDBEntities())
+            {
+
+                dgvCustomer.DataSource = db.Customers.ToList<Customer>();
             
             }
         
